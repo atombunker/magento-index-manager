@@ -1,0 +1,133 @@
+<?php
+
+/**
+ * @category 	  design
+ * @package 	  Upment_Indexmanager
+ * @copyright 	Copyright (c) 2019 Upment (https://www.upment.com/)
+ */
+
+$_helper = $this->helper('indexmanager/data');
+$_indexCodes = $this->getAvailableIndexCodes();
+$buttonText = $this->timeline_visible;
+$buttonOrdersText = $this->$orders_visible;
+?>
+
+<div class="content-header timeline-content">
+    <table cellspacing="0">
+      <tbody>
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+        </tr>
+        <tr>
+            <td><button onclick=<?php
+              if ($this->timeline_visible == 'Show'){
+                $buttonText = 'Hide';
+              } else {
+                $buttonText = 'Show';
+              }
+              echo "location.href=\"" . $this->getUrl('*/*/index', array('timeline' => $buttonText)) . "\""
+              ?>>
+              <?php echo $buttonText ?></button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<?php if ($this->timeline_visible == 'Show'){ ?>
+<div id="hours-selector">
+  <p>Orders&emsp; &emsp;&emsp;: <button onclick=<?php
+    if ($this->orders_visible == 'Show'){
+      $buttonOrdersText = 'Hide';
+    } else {
+      $buttonOrdersText = 'Show';
+    }
+    echo "location.href=\"" . $this->getUrl('*/*/index', array('orders' => $buttonOrdersText)) . "\""
+    ?>><?php echo $buttonOrdersText ?></button></p>
+  <p>Show last&emsp;&emsp;: <?php
+  $showHours = array(6, 12, 24, 48, 72);
+  foreach ($showHours as $showHour) {
+    if ($this->view_last != $showHour) {
+      echo "<a href=\"" . $this->getUrl('*/*/index', array('hours' => $showHour, 'timeline' => 'Show')) . "\">" . $showHour . " hours</a> ";
+    } else {
+      echo "<strong>" . $showHour . " hours</strong> ";
+    }
+  }
+  ?></p>
+
+  <p>Min line width : <?php
+  $showPixels = array(3, 4, 5, 6, 7);
+  foreach ($showPixels as $showPixel) {
+    if ($this->line_width != $showPixel) {
+      echo "<a href=\"" . $this->getUrl('*/*/index', array('px' => $showPixel, 'timeline' => 'Show')) . "\">" . $showPixel . " pixels</a> ";
+    } else {
+      echo "<strong>" . $showPixel . " pixels</strong> ";
+    }
+  }
+  ?></p>
+</div>
+
+<div id="maincontainer">
+
+    <?php if (count($_indexCodes) > 0): ?>
+
+        <div id="contentwrapper">
+            <div id="contentcolumn">
+                <div class="timeline-box">
+                    <div class="timeline-panel" style="width: <?php echo $this->getTimelinePanelWidth(); ?>px;">
+
+                        <div id="now" style="left: <?php echo $this->getNowline(); ?>px"><div class="arrow"></div></div>
+
+                        <div class="row hours">
+                            <div class="timeline">
+                                <?php for ($i = $this->getStarttime(); $i < $this->getEndtime(); $i += 60 * 60): ?>
+                                    <div class="hour"><span><?php echo $_helper->decorateTime($i, false, 'Y-m-d H:i'); ?></span></div>
+                                <?php endfor; ?>
+                            </div>
+                        </div>
+
+                        <?php foreach ($_indexCodes as $indexCode): ?>
+                            <?php if ($indexCode != 'orders' || ($indexCode == 'orders' && $buttonOrdersText == 'Hide')) { ?>
+                            <?php $_timeline = $this->getTimelineForCode($indexCode); ?>
+                            <div class="row<?php if ($indexCode == 'orders') echo " orderrow" ?>">
+                                <div class="timeline timeline_<?php echo $indexCode; ?>">
+                                    <?php foreach ($_timeline as $_timeitem): /* @var $_schedule Aoe_Scheduler_Model_Schedule */ ?>
+                                        <?php echo $this->getGanttDivAttributes($_timeitem); ?>
+                                        <?php echo $this->getLayout()->createBlock('indexmanager/adminhtml_timelineDetail')->setIndex($_timeitem)->toHtml(); ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                          <?php } ?>
+                        <?php endforeach; ?>
+
+                    </div>
+                </div>
+            </div>
+            <!-- id="contentcolumn" -->
+        </div><!-- id="contentwrapper" -->
+
+        <div id="leftcolumn">
+
+            <div class="row hours">
+                <div class="caption"><?php echo $_helper->decorateTime($this->getStarttime(), true, 'Y-m-d H:i'); ?>
+                    - <?php echo $_helper->decorateTime($this->getEndtime(), true, 'Y-m-d H:i'); ?></div>
+            </div>
+
+            <?php foreach ($_indexCodes as $indexCode): /* @var $jobCode string */ ?>
+                <?php if ($indexCode != 'orders' || ($indexCode == 'orders' && $buttonOrdersText == 'Hide')) { ?>
+                <div class="row<?php if ($indexCode == 'orders') echo " orderrow" ?>">
+                    <div class="configuration">
+                        <?php echo $_helper->getFriendlyName($indexCode); ?>
+                    </div>
+                </div>
+                <?php } ?>
+            <?php endforeach; ?>
+
+        </div><!-- id="leftcolumn" -->
+
+    <?php else: ?>
+        <?php echo $this->__('No tasks found.'); ?>
+    <?php endif; ?>
+
+</div><!-- id="maincontainer" -->
+<?php } ?>

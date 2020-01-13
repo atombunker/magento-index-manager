@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category 	  Upment
+ * @package 	  Upment_Indexmanager
+ * @copyright 	Copyright (c) 2019 Upment (https://www.upment.com/)
+ */
+-->
+<layout version="0.1.0">
+  <indexmanager_adminhtml_indexmanager_index>
+    <reference name="head">
+        <action method="addCss"><stylesheet>upment_indexmanager/StyleSheet/timeline.css</stylesheet></action>
+        <action method="addCss"><stylesheet>upment_indexmanager/StyleSheet/bars.css</stylesheet></action>
+
+        <action method="addItem"><type>skin_js</type><script>upment_indexmanager/JavaScript/jquery-1.6.2.min.js</script></action>
+        <action method="addItem"><type>skin_js</type><script>upment_indexmanager/JavaScript/tooltip.js</script></action>
+        <action method="addItem"><type>skin_js</type><script>upment_indexmanager/JavaScript/tooltip.dynamic.js</script></action>
+        <action method="addItem"><type>skin_js</type><script>upment_indexmanager/JavaScript/common.js</script></action>
+    </reference>
+  	<reference name="content">
+  	  <block type="indexmanager/adminhtml_indexmanager" name="indexmanager" />
+      <block type="indexmanager/adminhtml_timeline" name="indexmanager.timeline" template="upment/indextimeline.phtml"/>
+  	</reference>
+  </indexmanager_adminhtml_indexmanager_index>
+</layout>

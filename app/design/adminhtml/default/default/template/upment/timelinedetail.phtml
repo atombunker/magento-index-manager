@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @category 	  design
+ * @package 	  Upment_Indexmanager
+ * @copyright 	Copyright (c) 2019 Upment (https://www.upment.com/)
+ */
+
+$_index = $this->getIndex();
+$_helper = $this->helper('indexmanager');
+?>
+
+<div class="details">
+    <div class="details-headline <?php echo $_index->getStatusClass(); ?>">
+        <h3><?php echo $_helper->getFriendlyName($_index->getIndexcode()); ?></h3>
+    </div>
+    <div class="details-content">
+        <table>
+            <tr>
+                <td class="label"><?php echo $this->__('Status') ?>:</td>
+                <td>
+                    <div class="status"><?php echo $_helper->decorateStatus($_index->getStatus()) ?></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Started at') ?>:</td>
+                <td><?php echo $_helper->decorateTime($_index->getStartedAt()); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Finished at') ?>:</td>
+                <td><?php echo $_helper->decorateTime($_index->getFinishedAt()); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Started by') ?>:</td>
+                <td><?php echo $_index->getFriendlySource(); ?></td>
+            </tr>
+            <?php if ($_index->getOutput()): ?>
+                <tr>
+                    <td class="label" colspan="2"><?php echo $this->__('Message') ?>:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <pre><?php echo $_index->getOutput(); ?></pre>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        </table>
+    </div>
+</div>

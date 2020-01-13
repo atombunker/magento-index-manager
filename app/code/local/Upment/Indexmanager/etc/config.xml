@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category 	  Upment
+ * @package 	  Upment_Indexmanager
+ * @copyright 	Copyright (c) 2019 Upment (https://www.upment.com/)
+ */
+-->
+<config>
+
+  <modules>
+    <Upment_Indexmanager>
+      <version>0.1.0</version>
+    </Upment_Indexmanager>
+  </modules>
+
+
+  <global>
+
+    <helpers>
+      <indexmanager>
+        <class>Upment_Indexmanager_Helper</class>
+      </indexmanager>
+    </helpers>
+
+    <blocks>
+      <indexmanager>
+        <class>Upment_Indexmanager_Block</class>
+      </indexmanager>
+    </blocks>
+
+    <models>
+      <index>
+        <rewrite>
+          <process>Upment_Indexmanager_Model_Index_Process</process>
+        </rewrite>
+      </index>
+  	  <indexmanager>
+        <class>Upment_Indexmanager_Model</class>
+        <resourceModel>indexmanager_mysql4</resourceModel>
+      </indexmanager>
+      <indexmanager_mysql4>
+        <class>Upment_Indexmanager_Model_Mysql4</class>
+        <entities>
+          <indexmanager>
+            <table>upment_indexes</table>
+          </indexmanager>
+          <indexlog>
+            <table>upment_indexlog</table>
+          </indexlog>
+        </entities>
+      </indexmanager_mysql4>
+    </models>
+
+    <resources>
+      <indexmanager_setup>
+        <setup>
+          <module>Upment_Indexmanager</module>
+        </setup>
+        <connection>
+          <use>core_setup</use>
+        </connection>
+      </indexmanager_setup>
+    </resources>
+
+  </global>
+
+
+  <admin>
+    <routers>
+      <indexmanager>
+        <use>admin</use>
+        <args>
+          <module>Upment_Indexmanager</module>
+          <frontName>indexmanager</frontName>
+        </args>
+      </indexmanager>
+    </routers>
+  </admin>
+
+  <adminhtml>
+    <menu>
+      <upment module="indexmanager">
+        <title>Upment</title>
+        <sort_order>60</sort_order>
+        <children>
+          <indexmanager module="indexmanager">
+            <title>Index Manager</title>
+            <sort_order>20</sort_order>
+            <action>indexmanager/adminhtml_indexmanager</action>
+          </indexmanager>
+        </children>
+      </upment>
+    </menu>
+    <acl>
+      <resources>
+        <all>
+          <title>Allow Everything</title>
+        </all>
+        <admin>
+          <children>
+            <upment translate="title" module="indexmanager">
+              <title>Upment</title>
+              <sort_order>60</sort_order>
+              <children>
+                <indexmanager translate="title">
+                  <title>Index Manager</title>
+                  <sort_order>0</sort_order>
+                </indexmanager>
+              </children>
+            </upment>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+    <layout>
+      <updates>
+        <indexmanager>
+          <file>indexmanager.xml</file>
+        </indexmanager>
+      </updates>
+    </layout>
+  </adminhtml>
+
+  <crontab>
+    <jobs>
+      <upment_indexmanager>
+        <schedule><cron_expr>* * * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::customReindex</model></run>
+      </upment_indexmanager>
+      <upment_reindex_stock>
+        <schedule><cron_expr>*/15 * * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>cataloginventory_stock</indexcode>
+      </upment_reindex_stock>
+      <upment_reindex_price>
+        <schedule><cron_expr>2 * * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>catalog_product_price</indexcode>
+      </upment_reindex_price>
+      <upment_reindex_attribute>
+        <schedule><cron_expr>17 */6 * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>catalog_product_attribute</indexcode>
+      </upment_reindex_attribute>
+      <upment_reindex_url>
+        <schedule><cron_expr>32 4 * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>catalog_url</indexcode>
+      </upment_reindex_url>
+      <upment_reindex_category>
+        <schedule><cron_expr>17 4 * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>catalog_category_product</indexcode>
+      </upment_reindex_category>
+      <upment_reindex_search>
+        <schedule><cron_expr>20 4 * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>catalogsearch_fulltext</indexcode>
+      </upment_reindex_search>
+      <upment_reindex_tags>
+        <schedule><cron_expr>50 3 * * *</cron_expr></schedule>
+        <run><model>indexmanager/cron::runReindex</model></run>
+        <indexcode>tag_summary</indexcode>
+      </upment_reindex_tags>
+    </jobs>
+  </crontab>
+
+</config>

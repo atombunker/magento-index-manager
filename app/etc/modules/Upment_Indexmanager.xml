@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category 	  Upment
+ * @package 	  Upment_Indexmanager
+ * @copyright 	Copyright (c) 2019 Upment (https://www.upment.com/)
+ */
+-->
+<config>
+    <modules>
+        <Upment_Indexmanager>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>0.1.0</version>
+            <depends><Mage_Index /></depends>
+        </Upment_Indexmanager>
+    </modules>
+</config>
