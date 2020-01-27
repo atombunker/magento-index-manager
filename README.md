@@ -22,7 +22,7 @@ Magento 1.9.x Module for managing and analyzing indexers. Works much faster then
 
 ## Upment Indexer Module for High Traffic Websites
 
-The module was developed for the purpose of managing a high traffic Magento store.
+The module was developed for the purpose of managing a high traffic Magento store. Management staff was able to update prices and search index in the backend without interfering with the traffic. With the core magento module and that amount of traffic that wasn't possible.
 
 ![](images/index1.png)
 ![](images/index2.png)
