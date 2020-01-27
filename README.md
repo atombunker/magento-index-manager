@@ -1,6 +1,6 @@
 # Magento Index Manager Module
 
-Magento 1.9 Module for managing and analyzing indexers.
+Magento 1.9.x Module for managing and analyzing indexers.
 
 ## Features
 
