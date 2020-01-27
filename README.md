@@ -1,6 +1,7 @@
 # Magento Index Manager Module
 
-Magento 1.9.x Module for managing and analyzing indexers.
+Magento 1.9.x Module for managing and analyzing indexers. Works much faster then Magento core indexer (synchron). Optimized and build for high traffic Magento stores: https://upment.com/rebelliousfashion. Optimized for Visual Merchandiser.
+ 
 
 ## Features
 
@@ -8,6 +9,9 @@ Magento 1.9.x Module for managing and analyzing indexers.
 - Customisable visual display of logged events.
 - Indexing job queue.
 - Failed indexing jobs will be restarted.
+- History Timeline
+- Fast Asynchronous indexing
+- Optimized for Visual Merchandiser (Scheduled indexing)
 
 ## Installation
 
@@ -15,3 +19,4 @@ Magento 1.9.x Module for managing and analyzing indexers.
 2. Log into your website's admin panel (if you are already logged in, you might have to log out and log back in).
 3. Flush Magento Cache.
 4. Go to Upment - Index Manager. You should be able to see indexing options.
+
