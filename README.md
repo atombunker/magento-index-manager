@@ -20,7 +20,7 @@ Magento 1.9.x Module for managing and analyzing indexers. Works much faster then
 3. Flush Magento Cache.
 4. Go to Upment - Index Manager. You should be able to see indexing options.
 
-## Images
+## Upment Indexer Module for High Traffic Websites:
 
 ![](images/index1.png)
 ![](images/index2.png)
