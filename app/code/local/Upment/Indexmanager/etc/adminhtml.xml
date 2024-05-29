@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <upment_indexmanager translate="title">
+                    <title>Index Manager</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/indexmanager</action>
+                </upment_indexmanager>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <upment_indexmanager translate="title" module="upment_indexmanager">
+                                <title>Upment Indexmanager</title>
+                                <sort_order>1</sort_order>
+                            </upment_indexmanager>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

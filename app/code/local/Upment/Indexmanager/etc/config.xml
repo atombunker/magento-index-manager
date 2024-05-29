@@ -14,6 +14,28 @@
     </Upment_Indexmanager>
   </modules>
 
+  <admin>
+    <routers>
+      <adminhtml>
+        <args>
+          <modules>
+            <Upment_Indexmanager before="Mage_Adminhtml">Upment_Indexmanager_Adminhtml</Upment_Indexmanager>
+          </modules>
+        </args>
+      </adminhtml>
+    </routers>
+  </admin>
+
+  <adminhtml>
+    <layout>
+      <updates>
+        <indexmanager>
+          <file>indexmanager.xml</file>
+        </indexmanager>
+      </updates>
+    </layout>
+  </adminhtml>
+
 
   <global>
 
@@ -65,63 +87,6 @@
 
   </global>
 
-
-  <admin>
-    <routers>
-      <indexmanager>
-        <use>admin</use>
-        <args>
-          <module>Upment_Indexmanager</module>
-          <frontName>indexmanager</frontName>
-        </args>
-      </indexmanager>
-    </routers>
-  </admin>
-
-  <adminhtml>
-    <menu>
-      <upment module="indexmanager">
-        <title>Upment</title>
-        <sort_order>60</sort_order>
-        <children>
-          <indexmanager module="indexmanager">
-            <title>Index Manager</title>
-            <sort_order>20</sort_order>
-            <action>indexmanager/adminhtml_indexmanager</action>
-          </indexmanager>
-        </children>
-      </upment>
-    </menu>
-    <acl>
-      <resources>
-        <all>
-          <title>Allow Everything</title>
-        </all>
-        <admin>
-          <children>
-            <upment translate="title" module="indexmanager">
-              <title>Upment</title>
-              <sort_order>60</sort_order>
-              <children>
-                <indexmanager translate="title">
-                  <title>Index Manager</title>
-                  <sort_order>0</sort_order>
-                </indexmanager>
-              </children>
-            </upment>
-          </children>
-        </admin>
-      </resources>
-    </acl>
-    <layout>
-      <updates>
-        <indexmanager>
-          <file>indexmanager.xml</file>
-        </indexmanager>
-      </updates>
-    </layout>
-  </adminhtml>
-
   <crontab>
     <jobs>
       <upment_indexmanager>
@@ -165,5 +130,4 @@
       </upment_reindex_tags>
     </jobs>
   </crontab>
-
 </config>
