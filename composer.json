@@ -1,0 +1,6 @@
+{
+    "name": "upment/magento-index-manager",
+    "type": "magento-module",
+    "license": "GNU3",
+    "require": {}
+}
